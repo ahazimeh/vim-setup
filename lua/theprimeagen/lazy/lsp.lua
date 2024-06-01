@@ -16,23 +16,31 @@ return {
     config = function()
         local cmp = require('cmp')
         local cmp_lsp = require("cmp_nvim_lsp")
+
+        -- Debugging: Ensure cmp_lsp.default_capabilities() is a valid table
+        local default_capabilities = cmp_lsp.default_capabilities()
+        if type(default_capabilities) ~= "table" then
+            error("cmp_lsp.default_capabilities() did not return a table")
+        end
+
         local capabilities = vim.tbl_deep_extend(
             "force",
             {},
             vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities())
+            default_capabilities
+        )
 
         require("fidget").setup({})
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
+                'tsserver',
                 "lua_ls",
                 "rust_analyzer",
                 -- "gopls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
-
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
@@ -44,7 +52,7 @@ return {
                         capabilities = capabilities,
                         settings = {
                             Lua = {
-				    runtime = { version = "Lua 5.1" },
+                                runtime = { version = "Lua 5.1" },
                                 diagnostics = {
                                     globals = { "vim", "it", "describe", "before_each", "after_each" },
                                 }
@@ -67,7 +75,7 @@ return {
                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
                 ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-                ["<C-Space>"] = cmp.mapping.complete(),
+                ["<C-b>"] = cmp.mapping.complete(),
             }),
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
@@ -76,6 +84,9 @@ return {
                 { name = 'buffer' },
             })
         })
+
+        -- Auto-import keybinding
+        vim.api.nvim_set_keymap('n', '<leader>ai', '<cmd>lua vim.lsp.buf.code_action({ only = { "source.organizeImports" } })<CR>', { noremap = true, silent = true })
 
         vim.diagnostic.config({
             -- update_in_insert = true,
