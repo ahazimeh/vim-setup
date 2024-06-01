@@ -1,0 +1,3 @@
+@echo off
+echo Installing JSRegExp...
+REM Add your Windows equivalent commands here
