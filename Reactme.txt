@@ -1,0 +1,7 @@
+https://github.com/nvim-treesitter/nvim-treesitter/issues/2135
+    choco install llvm
+    npm install -g tree-sitter-cli
+    and add it inside require lazy 'nvim-treesitter/nvim-treesitter'
+
+install c compiler mingw
+env: MinGW -> C:\MinGW\bin
