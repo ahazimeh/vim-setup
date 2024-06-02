@@ -85,9 +85,6 @@ return {
             })
         })
 
-        -- Auto-import keybinding
-        vim.api.nvim_set_keymap('n', '<leader>ai', '<cmd>lua vim.lsp.buf.code_action({ only = { "source.organizeImports" } })<CR>', { noremap = true, silent = true })
-
         vim.diagnostic.config({
             -- update_in_insert = true,
             float = {
