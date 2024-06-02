@@ -5,3 +5,5 @@ https://github.com/nvim-treesitter/nvim-treesitter/issues/2135
 
 install c compiler mingw
 env: MinGW -> C:\MinGW\bin
+
+:LspRestart
