@@ -7,3 +7,8 @@ install c compiler mingw
 env: MinGW -> C:\MinGW\bin
 
 :LspRestart
+
+choco install ripgrep // to use it for livegrep
+
+s/'/"/g // replace ' by " 
+s/$/, // add , at the end of the line
