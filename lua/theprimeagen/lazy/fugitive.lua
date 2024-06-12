@@ -1,6 +1,20 @@
+local function unstage_current_file()
+
+    local file_path = vim.fn.expand('%:p')
+    print(file_path)
+    vim.cmd('Git reset "' .. file_path .. '"')
+end
+
+local function reset_changes_in_current_file()
+    -- Get the full path of the current file
+    local file_path = vim.fn.expand('%:p')
+    -- Surround the file path with double quotes to handle spaces
+    vim.cmd('Git checkout -- "' .. file_path .. '"')
+end
+
 return {
     "tpope/vim-fugitive",
-    config = function() 
+    config = function()
         vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
         local ThePrimeagen_Fugitive = vim.api.nvim_create_augroup("ThePrimeagen_Fugitive", {})
@@ -34,5 +48,7 @@ return {
 
         vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
         vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
+        vim.keymap.set('n', '<leader>gr', unstage_current_file, { noremap = true, silent = true })
+        vim.keymap.set('n', '<leader>gR', reset_changes_in_current_file, { noremap = true, silent = true })
     end
 }
