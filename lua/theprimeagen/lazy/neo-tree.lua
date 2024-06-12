@@ -7,5 +7,11 @@ return {
   },
   config = function()
     require("nvim-tree").setup {}
+      vim.api.nvim_set_keymap(
+        'n',         -- normal mode
+        '<C-t>',     -- keybinding
+        ':NvimTreeToggle<CR>', -- command to toggle nvim-tree
+        { noremap = true, silent = true } -- options
+      )
   end,
 }

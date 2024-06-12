@@ -28,7 +28,7 @@ return {
                     desc = "Harpoon Quick Menu",
                 },
                 {
-                    "<C-h>",
+                    "<leader>1",
                     function()
                         local harpoon = require("harpoon")
                         harpoon:list():select(1)
@@ -36,7 +36,7 @@ return {
                     desc = "Harpoon Quick Menu",
                 },
                 {
-                    "<C-t>",
+                    "<leader>2",
                     function()
                         local harpoon = require("harpoon")
                         harpoon:list():select(2)
@@ -44,7 +44,7 @@ return {
                     desc = "Harpoon Quick Menu",
                 },
                 {
-                    "<C-n>",
+                    "<leader>3",
                     function()
                         local harpoon = require("harpoon")
                         harpoon:list():select(3)
@@ -52,7 +52,7 @@ return {
                     desc = "Harpoon Quick Menu",
                 },
                 {
-                    "<C-s>",
+                    "<leader>4",
                     function()
                         local harpoon = require("harpoon")
                         harpoon:list():select(4)
