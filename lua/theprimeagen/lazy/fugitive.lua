@@ -48,6 +48,8 @@ return {
 
         vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
         vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
+
+        -- windows keybindings
         vim.keymap.set('n', '<leader>gr', unstage_current_file, { noremap = true, silent = true })
         vim.keymap.set('n', '<leader>gR', reset_changes_in_current_file, { noremap = true, silent = true })
     end
