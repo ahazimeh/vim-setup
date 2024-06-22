@@ -55,3 +55,5 @@ vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
+-- Fugitive
+vim.opt.diffopt:append("iwhite")
