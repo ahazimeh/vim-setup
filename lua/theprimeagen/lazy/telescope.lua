@@ -1,16 +1,39 @@
 return {
     "nvim-telescope/telescope.nvim",
 
-    tag = "0.1.5",
-
     dependencies = {
         "nvim-lua/plenary.nvim"
     },
 
     config = function()
-        require('telescope').setup({})
+        local actions = require('telescope.actions')
 
-        local builtin = require('telescope.builtin')
+        -- Define the open_and_resume function
+        local M = {}
+        M.actions = {}
+        M.actions.open_and_resume = function(prompt_bufnr)
+            --require('telescope.actions').select_default(prompt_bufnr)
+            require('telescope.builtin').resume()
+            require('telescope.builtin').resume()
+        end
+
+        require('telescope').setup({
+                  defaults = {
+                mappings = {
+                    i = {
+                        ["<C-o>"] = M.actions.open_and_resume
+                    },
+                    n = {
+                        ["<C-o>"] = M.actions.open_and_resume
+                    }
+                }
+            }
+    })
+
+    local builtin = require('telescope.builtin')
+    vim.keymap.set('n', '<leader>re', function()
+      require('telescope.builtin').resume()
+    end)
         vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
         vim.keymap.set('n', '<C-p>', builtin.git_files, {})
         vim.keymap.set('n', '<leader>pws', function()
