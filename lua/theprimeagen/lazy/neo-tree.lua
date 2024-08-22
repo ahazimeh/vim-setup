@@ -14,7 +14,7 @@ return {
         update_root = true
       },
     }
-    
+
     vim.api.nvim_set_keymap(
       'n',         -- normal mode
       '<C-t>',     -- keybinding
