@@ -1,5 +1,4 @@
 -- File: lua/plugins/lsp-file-operations.lua
-
 return {
   "antosha417/nvim-lsp-file-operations",
   dependencies = {
@@ -9,7 +8,6 @@ return {
   },
   config = function()
     local lsp_file_operations = require("lsp-file-operations")
-    local lspconfig = require("lspconfig")
     local plenary_job = require("plenary.job")
 
     lsp_file_operations.setup({
@@ -23,12 +21,9 @@ return {
         if client.name == "tsserver" then
           vim.lsp.stop_client(client.id)
           vim.defer_fn(function()
-            lspconfig.tsserver.setup({})
-            vim.schedule(function()
-              vim.cmd("LspStart tsserver")
-              vim.lsp.buf.workspace_symbol("")
-              print("TypeScript server restarted and workspace refreshed")
-            end)
+            vim.cmd("LspStart tsserver")
+            vim.lsp.buf.workspace_symbol("")
+            print("TypeScript server restarted and workspace refreshed")
           end, 1000)
           return
         end
@@ -60,11 +55,6 @@ return {
         end,
       }):start()
     end
-
-    -- Setup for JavaScript/TypeScript
-    lspconfig.tsserver.setup({
-      -- Your tsserver configuration here
-    })
 
     -- Commands to restart TS server and sync with git
     vim.api.nvim_create_user_command("RestartTSServer", restart_ts_server_and_refresh, {})
