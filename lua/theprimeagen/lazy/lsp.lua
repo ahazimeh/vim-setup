@@ -38,7 +38,7 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "tailwindcss",
-                -- "gopls",
+                "gopls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -61,6 +61,19 @@ return {
                             }
                         }
                     }
+                end,
+                ["gopls"] = function()
+                  require("lspconfig").gopls.setup {
+                    capabilities = capabilities,
+                      settings = {
+                          gopls = {
+                              analyses = {
+                                  unusedparams = true,
+                              },
+                              staticcheck = true,
+                          },
+                      },
+                  }
                 end,
             }
         })
