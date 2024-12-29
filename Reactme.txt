@@ -10,5 +10,8 @@ env: MinGW -> C:\MinGW\bin
 
 choco install ripgrep // to use it for livegrep
 
-s/'/"/g // replace ' by " 
+s/'/"/g // replace ' by "
 s/$/, // add , at the end of the line
+
+
+MasonInstall vue-language-server
