@@ -17,6 +17,36 @@ return {
         local cmp = require('cmp')
         local cmp_lsp = require("cmp_nvim_lsp")
 
+vim.api.nvim_create_user_command("RestartVolarLSPFast", function()
+  -- Stop all instances of Volar LSP
+  for _, client in ipairs(vim.lsp.get_active_clients()) do
+    if client.name == "volar" then
+      vim.cmd("LspStop volar")
+      --[[ vim.lsp.stop_client(client.id) ]]
+    end
+  end
+
+  -- Brief delay before restart
+  vim.defer_fn(function()
+    -- Start Volar LSP if it's not already running
+    if not vim.tbl_contains(vim.lsp.get_active_clients(), "volar") then
+      vim.cmd("LspStart volar")
+    end
+  end, 100)
+end, {})
+
+-- Automatically restart Volar LSP after saving or deleting a .vue file
+vim.api.nvim_create_autocmd({ "BufWritePost", "BufDelete" }, {
+  pattern = "*.vue",
+  callback = function()
+    -- Only restart LSP if the current buffer is valid
+    if vim.api.nvim_buf_is_valid(vim.api.nvim_get_current_buf()) then
+      vim.cmd("RestartVolarLSPFast")
+    end
+  end,
+})
+
+
         -- Debugging: Ensure cmp_lsp.default_capabilities() is a valid table
         local default_capabilities = cmp_lsp.default_capabilities()
         if type(default_capabilities) ~= "table" then
@@ -30,7 +60,6 @@ return {
             default_capabilities
         )
     capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
-
 
 
         require("fidget").setup({})
