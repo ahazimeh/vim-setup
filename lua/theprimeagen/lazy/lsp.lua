@@ -22,7 +22,7 @@ vim.api.nvim_create_user_command("RestartVolarLSPFast", function()
   for _, client in ipairs(vim.lsp.get_active_clients()) do
     if client.name == "volar" then
       vim.cmd("LspStop volar")
-      --[[ vim.lsp.stop_client(client.id) ]]
+      vim.lsp.stop_client(client.id)
     end
   end
 
