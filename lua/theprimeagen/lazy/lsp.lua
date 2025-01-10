@@ -91,7 +91,6 @@ return {
 
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
-                    lspconfig.tailwindcss.setup{}
                     lspconfig.lua_ls.setup {
                         capabilities = capabilities,
                         settings = {

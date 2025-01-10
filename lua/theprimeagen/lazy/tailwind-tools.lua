@@ -10,7 +10,7 @@ return {
   config = function()
     local lspconfig = require("lspconfig")
     lspconfig.tailwindcss.setup({
-      filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+      filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
       init_options = {
         userLanguages = {
           eelixir = "html-eex",
