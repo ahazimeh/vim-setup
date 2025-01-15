@@ -81,6 +81,8 @@ return {
                 "tailwindcss",
                 "gopls",
         "volar",
+        "angularls",
+        "cssls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -132,6 +134,28 @@ return {
            })
          end,
 
+["angularls"] = function()
+    require("lspconfig").angularls.setup({
+        capabilities = capabilities,
+        root_dir = require("lspconfig").util.root_pattern("angular.json", ".git"),
+    })
+end,
+        ["cssls"] = function()
+    require("lspconfig").cssls.setup({
+        capabilities = capabilities,
+        settings = {
+            css = {
+                validate = true, -- Enable CSS validation
+            },
+            less = {
+                validate = true, -- Enable LESS validation
+            },
+            scss = {
+                validate = true, -- Enable SCSS validation
+            },
+        },
+    })
+end,
          ["tsserver"] = function()
            local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
            local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
