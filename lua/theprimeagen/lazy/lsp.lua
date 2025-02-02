@@ -83,6 +83,7 @@ return {
         "volar",
         "angularls",
         "cssls",
+        "csharp_ls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -105,6 +106,12 @@ return {
                         }
                     }
                 end,
+        ["csharp_ls"] = function()
+    require("lspconfig").csharp_ls.setup({
+        capabilities = capabilities,
+        root_dir = require("lspconfig").util.root_pattern("*.sln", "*.csproj"),
+    })
+end,
          ["volar"] = function()
            require("lspconfig").volar.setup({
              capabilities = capabilities,
